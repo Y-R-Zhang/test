@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>浏览器特性检测</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        h1 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .item:last-child { border-bottom: none; }
+        .label { color: #333; font-size: 14px; }
+        .value { color: #666; font-size: 13px; text-align: right; word-break: break-all; max-width: 60%; }
+        .pass { color: #34c759; }
+        .fail { color: #ff3b30; }
+        .warn { color: #ff9500; }
+        .test-btn {
+            width: 100%;
+            padding: 14px;
+            background: #007aff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .test-btn:active { background: #0056b3; }
+        .result {
+            margin-top: 20px;
+            padding: 16px;
+            background: #fff;
+            border-radius: 12px;
+            display: none;
+        }
+        .result.show { display: block; }
+        .result h3 { font-size: 16px; margin-bottom: 12px; }
+        .log-entry {
+            font-size: 12px;
+            padding: 6px 10px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            margin-bottom: 6px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+        .error-log { background: #ffe0e0; }
+        .success-log { background: #e0ffe0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 浏览器特性检测</h1>
+
+        <div class="card">
+            <h2>📱 设备信息</h2>
+            <div class="item">
+                <span class="label">用户代理</span>
+                <span class="value" id="ua"></span>
+            </div>
+            <div class="item">
+                <span class="label">设备类型</span>
+                <span class="value" id="device-type"></span>
+            </div>
+            <div class="item">
+                <span class="label">屏幕尺寸</span>
+                <span class="value" id="screen-size"></span>
+            </div>
+            <div class="item">
+                <span class="label">视口尺寸</span>
+                <span class="value" id="viewport-size"></span>
+            </div>
+            <div class="item">
+                <span class="label">触控点数</span>
+                <span class="value" id="touch-points"></span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>⚡ JavaScript特性</h2>
+            <div class="item">
+                <span class="label">ES6 const/let</span>
+                <span class="value" id="es6-const"></span>
+            </div>
+            <div class="item">
+                <span class="label">箭头函数</span>
+                <span class="value" id="arrow-fn"></span>
+            </div>
+            <div class="item">
+                <span class="label">模板字符串</span>
+                <span class="value" id="template-lit"></span>
+            </div>
+            <div class="item">
+                <span class="label">Promise</span>
+                <span class="value" id="promise"></span>
+            </div>
+            <div class="item">
+                <span class="label">async/await</span>
+                <span class="value" id="async-await"></span>
+            </div>
+            <div class="item">
+                <span class="label">Map</span>
+                <span class="value" id="map"></span>
+            </div>
+            <div class="item">
+                <span class="label">Set</span>
+                <span class="value" id="set"></span>
+            </div>
+            <div class="item">
+                <span class="label">class语法</span>
+                <span class="value" id="class"></span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🎨 CSS特性</h2>
+            <div class="item">
+                <span class="label">CSS变量 (var)</span>
+                <span class="value" id="css-var"></span>
+            </div>
+            <div class="item">
+                <span class="label">flexbox</span>
+                <span class="value" id="flexbox"></span>
+            </div>
+            <div class="item">
+                <span class="label">grid</span>
+                <span class="value" id="grid"></span>
+            </div>
+            <div class="item">
+                <span class="label">position: sticky</span>
+                <span class="value" id="sticky"></span>
+            </div>
+            <div class="item">
+                <span class="label">backdrop-filter</span>
+                <span class="value" id="backdrop"></span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🖱️ DOM/事件特性</h2>
+            <div class="item">
+                <span class="label">closest()方法</span>
+                <span class="value" id="closest"></span>
+            </div>
+            <div class="item">
+                <span class="label">dataset属性</span>
+                <span class="value" id="dataset"></span>
+            </div>
+            <div class="item">
+                <span class="label">事件委托</span>
+                <span class="value" id="delegation"></span>
+            </div>
+            <div class="item">
+                <span class="label">touch事件</span>
+                <span class="value" id="touch-events"></span>
+            </div>
+            <div class="item">
+                <span class="label">pointer事件</span>
+                <span class="value" id="pointer-events"></span>
+            </div>
+        </div>
+
+        <button class="test-btn" onclick="runTests()">🧪 运行交互测试</button>
+
+        <div class="result" id="result">
+            <h3>测试结果</h3>
+            <div id="test-logs"></div>
+        </div>
+    </div>
+
+    <script>
+        // 设备信息
+        document.getElementById('ua').textContent = navigator.userAgent;
+        document.getElementById('device-type').textContent = /mobile|android|iphone|ipad/i.test(navigator.userAgent) ? '移动设备' : '桌面设备';
+        document.getElementById('screen-size').textContent = screen.width + ' x ' + screen.height;
+        document.getElementById('viewport-size').textContent = window.innerWidth + ' x ' + window.innerHeight;
+        document.getElementById('touch-points').textContent = navigator.maxTouchPoints || '未知';
+
+        // JavaScript特性检测
+        function check(name, test) {
+            try {
+                const result = test();
+                document.getElementById(name).textContent = result ? '✅ 支持' : '❌ 不支持';
+                document.getElementById(name).className = 'value ' + (result ? 'pass' : 'fail');
+                return result;
+            } catch(e) {
+                document.getElementById(name).textContent = '❌ 错误: ' + e.message;
+                document.getElementById(name).className = 'value fail';
+                return false;
+            }
+        }
+
+        check('es6-const', () => { const x = 1; return typeof x !== 'undefined'; });
+        check('arrow-fn', () => { const f = () => 1; return f() === 1; });
+        check('template-lit', () => { const t = `test`; return t === 'test'; });
+        check('promise', () => { return typeof Promise !== 'undefined'; });
+        check('async-await', () => { try { eval('(async () => {})'); return true; } catch(e) { return false; } });
+        check('map', () => { return typeof Map !== 'undefined'; });
+        check('set', () => { return typeof Set !== 'undefined'; });
+        check('class', () => { try { eval('class Test {}'); return true; } catch(e) { return false; } });
+
+        // CSS特性检测
+        function checkCSS(name, prop, value) {
+            const el = document.createElement('div');
+            document.body.appendChild(el);
+            try {
+                el.style[prop] = value;
+                const result = el.style[prop] === value;
+                document.getElementById(name).textContent = result ? '✅ 支持' : '❌ 不支持';
+                document.getElementById(name).className = 'value ' + (result ? 'pass' : 'fail');
+                return result;
+            } catch(e) {
+                document.getElementById(name).textContent = '❌ 错误';
+                document.getElementById(name).className = 'value fail';
+                return false;
+            } finally {
+                document.body.removeChild(el);
+            }
+        }
+
+        checkCSS('css-var', '--test', 'red');
+        checkCSS('flexbox', 'display', 'flex');
+        checkCSS('grid', 'display', 'grid');
+        checkCSS('sticky', 'position', 'sticky');
+        checkCSS('backdrop', 'backdropFilter', 'blur(10px)');
+
+        // DOM特性检测
+        check('closest', () => {
+            const el = document.createElement('div');
+            const child = document.createElement('span');
+            el.appendChild(child);
+            return el.contains(child) && child.closest('div') === el;
+        });
+
+        check('dataset', () => {
+            const el = document.createElement('div');
+            el.dataset.test = 'value';
+            return el.dataset.test === 'value';
+        });
+
+        check('delegation', () => {
+            return document.addEventListener && document.removeEventListener ? true : false;
+        });
+
+        check('touch-events', () => {
+            return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        });
+
+        check('pointer-events', () => {
+            return window.PointerEvent ? true : false;
+        });
+
+        // 交互测试
+        function log(msg, type) {
+            const logs = document.getElementById('test-logs');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry ' + (type === 'error' ? 'error-log' : type === 'success' ? 'success-log' : '');
+            entry.textContent = new Date().toLocaleTimeString() + ': ' + msg;
+            logs.appendChild(entry);
+        }
+
+        function runTests() {
+            const result = document.getElementById('result');
+            result.classList.add('show');
+            document.getElementById('test-logs').innerHTML = '';
+
+            log('开始测试...', 'info');
+
+            // 测试按钮点击
+            log('创建测试按钮...', 'info');
+            const btn = document.createElement('button');
+            btn.id = 'test-btn';
+            btn.textContent = '测试按钮';
+            btn.style.cssText = 'padding:20px;background:#007aff;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;';
+            document.body.appendChild(btn);
+
+            let clickCount = 0;
+            const handleClick = () => {
+                clickCount++;
+                log('按钮被点击! 次数: ' + clickCount, 'success');
+            };
+
+            // 测试onclick
+            btn.onclick = handleClick;
+            log('已设置onclick，等待点击...', 'info');
+
+            // 模拟点击
+            setTimeout(() => {
+                log('触发click事件...', 'info');
+                btn.click();
+            }, 500);
+
+            // 测试事件委托
+            setTimeout(() => {
+                const container = document.createElement('div');
+                container.id = 'test-container';
+                container.innerHTML = '<button class="delegated-btn">委托按钮</button>';
+                document.body.appendChild(container);
+
+                let delegatedCount = 0;
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('delegated-btn')) {
+                        delegatedCount++;
+                        log('事件委托触发! 次数: ' + delegatedCount, 'success');
+                    }
+                });
+
+                log('已设置事件委托，等待点击...', 'info');
+            }, 1500);
+
+            // 测试closest
+            setTimeout(() => {
+                const parent = document.createElement('div');
+                parent.className = 'parent';
+                const child = document.createElement('span');
+                child.className = 'child';
+                parent.appendChild(child);
+
+                if (child.closest('.parent')) {
+                    log('closest()正常工作', 'success');
+                } else {
+                    log('closest()有问题!', 'error');
+                }
+            }, 2500);
+
+            // 清理
+            setTimeout(() => {
+                document.body.removeChild(document.getElementById('test-btn'));
+                document.body.removeChild(document.getElementById('test-container'));
+                log('测试完成!', 'success');
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
