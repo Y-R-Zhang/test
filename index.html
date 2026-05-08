@@ -439,76 +439,6 @@
             gap: 8px;
             margin-bottom: 14px;
         }
-        .word-checkin-card {
-            display: flex;
-            gap: 16px;
-            padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 16px;
-            color: #fff;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-        .word-checkin-info {
-            flex: 1;
-        }
-        .word-checkin-title {
-            font-size: 12px;
-            opacity: 0.9;
-            margin-bottom: 6px;
-        }
-        .word-checkin-word {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .word-checkin-meaning {
-            font-size: 13px;
-            opacity: 0.9;
-            margin-bottom: 4px;
-        }
-        .word-checkin-desc {
-            font-size: 12px;
-            opacity: 0.8;
-        }
-        .word-checkin-action {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            min-width: 100px;
-        }
-        .word-checkin-stats {
-            display: flex;
-            gap: 16px;
-            text-align: center;
-        }
-        .word-checkin-stat-num {
-            font-size: 20px;
-            font-weight: 700;
-        }
-        .word-checkin-stat-label {
-            font-size: 10px;
-            opacity: 0.8;
-        }
-        .word-checkin-btn {
-            padding: 8px 20px;
-            border-radius: 20px;
-            border: none;
-            background: #fff;
-            color: #667eea;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .word-checkin-btn:hover {
-            transform: scale(1.05);
-        }
-        .word-checkin-btn.checked-in {
-            background: rgba(255, 255, 255, 0.3);
-            color: #fff;
-        }
         .tday-d {
             font-size: 22px;
             font-weight: 600;
@@ -624,18 +554,6 @@
         }
         .cday.has-tasks {
             border-color: var(--border);
-        }
-        .cday.has-checkin {
-            background: rgba(102, 126, 234, 0.1);
-            border-color: rgba(102, 126, 234, 0.3);
-        }
-        .cday.has-checkin.today {
-            background: rgba(102, 126, 234, 0.2);
-        }
-        .ccheckin {
-            font-size: 10px;
-            color: #667eea;
-            font-weight: 700;
         }
         .cnum {
             font-size: 12px;
@@ -1901,7 +1819,7 @@
                 <div class="view" id="view-calendar"><div class="cal-nav"><button class="cnbtn" onclick="calNav(-1)">‹</button><div class="cal-m" id="cal-m"></div><button class="cnbtn" onclick="calNav(1)">›</button></div><div class="cal-grid" id="cal-grid"></div><div class="cal-detail" id="cal-det" style="display:none"><div class="cdh"><span class="cdh-date" id="cdh-date"></span><button class="cdh-add" onclick="window.openModal(\'task\', null, selectedCalKey)">+ 添加任务</button></div><div id="cdh-body"></div></div></div>
                 <div class="view" id="view-notes"></div>
                 <div class="view" id="view-overdue"><div class="od-hero"><div style="font-size:28px;line-height:1;flex-shrink:0">🗂</div><div><div class="od-num" id="od-n">0</div><div class="od-sub">项逾期未完成的任务</div></div><div class="od-oldest"><div class="od-oldest-l">最久逾期</div><div class="od-oldest-n" id="od-max">0天</div></div></div><div class="stats-row"><div class="stat-c"><div class="stat-n" id="od-h" style="color:var(--red)">0</div><div class="stat-l">🔴 紧急</div></div><div class="stat-c"><div class="stat-n" id="od-m" style="color:var(--amber)">0</div><div class="stat-l">🟡 中等</div></div><div class="stat-c"><div class="stat-n" id="od-l" style="color:var(--green)">0</div><div class="stat-l">🟢 低优先</div></div></div><div id="od-list"></div></div>
-                <div class="view" id="view-achievements"><div class="ach-banner"><div class="ach-banner-icon">🏆</div><div class="ach-banner-info"><div class="ach-banner-num" id="ach-total-badges">0</div><div class="ach-banner-sub">枚徽章已解锁</div></div><div class="ach-banner-right"><div class="ach-banner-pct" id="ach-pct">0%</div><div class="ach-banner-pctl">成就达成率</div></div></div><div class="ach-stats-row"><div class="ach-stat-c"><span class="ach-stat-icon">✅</span><div class="ach-stat-n" id="ach-completed">0</div><div class="ach-stat-l">累计完成</div></div><div class="ach-stat-c"><span class="ach-stat-icon">🔥</span><div class="ach-stat-n" id="ach-streak">0</div><div class="ach-stat-l">最长连续(天)</div></div><div class="ach-stat-c"><span class="ach-stat-icon">🎯</span><div class="ach-stat-n" id="ach-high-done">0</div><div class="ach-stat-l">紧急任务完成</div></div><div class="ach-stat-c"><span class="ach-stat-icon">📁</span><div class="ach-stat-n" id="ach-proj-done">0</div><div class="ach-stat-l">完整项目</div></div></div><div class="ach-stats-row"><div class="ach-stat-c"><span class="ach-stat-icon">📚</span><div class="ach-stat-n" id="ach-word-total">0</div><div class="ach-stat-l">单词累计打卡</div></div><div class="ach-stat-c"><span class="ach-stat-icon">🎯</span><div class="ach-stat-n" id="ach-word-streak">0</div><div class="ach-stat-l">单词连续天数</div></div></div><div class="ach-section-title">🏅 成就徽章</div><div class="ach-badges-grid" id="ach-badges-grid"></div><button class="add-badge-btn" onclick="openModal('badge')">➕ 添加自定义勋章</button><div class="ach-section-title">📋 已完成任务清单</div><div id="ach-completed-list" class="completed-list"></div><div class="ach-section-title">📊 项目完成进度</div><div class="ach-progress-section" id="ach-progress-section"></div></div>
+                <div class="view" id="view-achievements"><div class="ach-banner"><div class="ach-banner-icon">🏆</div><div class="ach-banner-info"><div class="ach-banner-num" id="ach-total-badges">0</div><div class="ach-banner-sub">枚徽章已解锁</div></div><div class="ach-banner-right"><div class="ach-banner-pct" id="ach-pct">0%</div><div class="ach-banner-pctl">成就达成率</div></div></div><div class="ach-stats-row"><div class="ach-stat-c"><span class="ach-stat-icon">✅</span><div class="ach-stat-n" id="ach-completed">0</div><div class="ach-stat-l">累计完成</div></div><div class="ach-stat-c"><span class="ach-stat-icon">🔥</span><div class="ach-stat-n" id="ach-streak">0</div><div class="ach-stat-l">最长连续(天)</div></div><div class="ach-stat-c"><span class="ach-stat-icon">🎯</span><div class="ach-stat-n" id="ach-high-done">0</div><div class="ach-stat-l">紧急任务完成</div></div><div class="ach-stat-c"><span class="ach-stat-icon">📁</span><div class="ach-stat-n" id="ach-proj-done">0</div><div class="ach-stat-l">完整项目</div></div></div><div class="ach-section-title">🏅 成就徽章</div><div class="ach-badges-grid" id="ach-badges-grid"></div><button class="add-badge-btn" onclick="openModal('badge')">➕ 添加自定义勋章</button><div class="ach-section-title">📋 已完成任务清单</div><div id="ach-completed-list" class="completed-list"></div><div class="ach-section-title">📊 项目完成进度</div><div class="ach-progress-section" id="ach-progress-section"></div></div>
                 <div class="view" id="view-data"><div style="font-size:15px;font-weight:600;margin-bottom:14px">📊 数据统计</div><div class="data-stats" id="data-stats"></div><div class="sl">完成趋势</div><div id="data-recent" style="font-size:12px;color:var(--text2);"></div><div class="sl" style="margin-top:24px">💾 数据管理</div><div style="display:flex;gap:8px;margin-bottom:14px"><button class="mbtn data-export-btn" style="flex:1;background:var(--blue);color:#fff;" onclick="exportData()">导出数据</button><button class="mbtn data-import-btn" style="flex:1;" onclick="importData()">导入数据</button></div><input type="file" id="import-file" accept=".json" style="display:none;" onchange="handleFileImport(event)"></div>
             </div>
         </div>
@@ -1991,15 +1909,13 @@
             ],
             customAchievements: [],
             completedOverdueTasks: [],
-            wordCheckins: [],
         };
 
         let db = JSON.parse(JSON.stringify(DEFAULT_DATA));
 
         function loadDB() { try { const raw = localStorage.getItem(DB_KEY); if (raw) { const saved = JSON.parse(raw); db.projects = saved.projects || db.projects; db.tasks = saved.tasks || db.tasks; db.notes = saved.notes || db.notes; db.achievements = saved.achievements || db.achievements; db.customAchievements = saved.customAchievements || []; db.completedOverdueTasks = saved.completedOverdueTasks || []; db.calTasks = saved.calTasks || {}; } } catch(e) { console.warn(e); } }
-        function saveDB() { try { localStorage.setItem(DB_KEY, JSON.stringify({ projects: db.projects, tasks: db.tasks, notes: db.notes, calTasks: db.calTasks, achievements: db.achievements, customAchievements: db.customAchievements, completedOverdueTasks: db.completedOverdueTasks, wordCheckins: db.wordCheckins || [] })); } catch(e) {} }
+        function saveDB() { try { localStorage.setItem(DB_KEY, JSON.stringify({ projects: db.projects, tasks: db.tasks, notes: db.notes, calTasks: db.calTasks, achievements: db.achievements, customAchievements: db.customAchievements, completedOverdueTasks: db.completedOverdueTasks })); } catch(e) {} }
         loadDB();
-        if (!db.wordCheckins) db.wordCheckins = [];
 
         function genId() { return 'id_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7); }
         function getProject(id) { return db.projects.find(p => p.id === id); }
@@ -2014,37 +1930,6 @@
         function getDaysUntil(deadline) { if (!deadline) return Infinity; const dl = new Date(deadline + 'T00:00:00'); return Math.floor((dl - today) / (1000 * 60 * 60 * 24)); }
         function toast(msg) { const t = document.createElement('div'); t.className = 'toast'; t.innerText = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2000); }
         function showAchievement(a) { toast('🏆 解锁成就：' + a.name); }
-        
-        function calculateWordStreak() {
-            if (!db.wordCheckins || db.wordCheckins.length === 0) return 0;
-            const sorted = [...db.wordCheckins].sort().reverse();
-            let streak = 0;
-            let checkDate = new Date(today);
-            for (let i = 0; i < 365; i++) {
-                const dateStr = checkDate.toISOString().split('T')[0];
-                if (sorted.includes(dateStr)) {
-                    streak++;
-                    checkDate.setDate(checkDate.getDate() - 1);
-                } else {
-                    break;
-                }
-            }
-            return streak;
-        }
-        
-        window.toggleWordCheckin = function() {
-            if (!db.wordCheckins) db.wordCheckins = [];
-            const todayKey = today.toISOString().split('T')[0];
-            if (db.wordCheckins.includes(todayKey)) {
-                db.wordCheckins = db.wordCheckins.filter(d => d !== todayKey);
-                toast('取消打卡');
-            } else {
-                db.wordCheckins.push(todayKey);
-                toast('打卡成功！');
-            }
-            saveDB();
-            refreshAll();
-        };
 
         function syncAllCalTasks() {
             db.calTasks = {};
@@ -2099,36 +1984,6 @@
             overdue.sort((a, b) => getOverdueDays(b) - getOverdueDays(a));
             upcomingAll.sort((a, b) => getDaysUntil(a.deadline) - getDaysUntil(b.deadline));
             let html = `<div class="today-hdr"><span class="tday-d">今天</span><span class="tday-s">${today.getMonth() + 1}月${today.getDate()}日 · 星期${DOW[today.getDay()]}</span></div>`;
-            
-            const todayKey = today.toISOString().split('T')[0];
-            const isCheckedIn = db.wordCheckins && db.wordCheckins.includes(todayKey);
-            const totalCheckins = db.wordCheckins ? db.wordCheckins.length : 0;
-            const currentStreak = calculateWordStreak();
-            
-            html += `<div class="word-checkin-card">
-                <div class="word-checkin-info">
-                    <div class="word-checkin-title">📚 每日单词</div>
-                    <div class="word-checkin-word">perseverance</div>
-                    <div class="word-checkin-meaning">/ˌpɜːsɪˈvɪərəns/ n. 坚持不懈；韧性</div>
-                    <div class="word-checkin-desc">释义：面对困难时持续努力的能力</div>
-                </div>
-                <div class="word-checkin-action">
-                    <div class="word-checkin-stats">
-                        <div class="word-checkin-stat">
-                            <div class="word-checkin-stat-num">${totalCheckins}</div>
-                            <div class="word-checkin-stat-label">累计打卡</div>
-                        </div>
-                        <div class="word-checkin-stat">
-                            <div class="word-checkin-stat-num">${currentStreak}</div>
-                            <div class="word-checkin-stat-label">连续天数</div>
-                        </div>
-                    </div>
-                    <button class="word-checkin-btn ${isCheckedIn ? 'checked-in' : ''}" onclick="toggleWordCheckin()">
-                        ${isCheckedIn ? '✓ 已打卡' : '打卡签到'}
-                    </button>
-                </div>
-            </div>`;
-            
             if (overdue.length) {
                 html += `<div class="section-header" onclick="toggleSection(this)"><span class="chev ${todayCollapsed.overdue ? '' : 'open'}">▶</span><span class="sl" style="margin:0;color:var(--red-t)">⚠️ 逾期警报 (${overdue.length})</span></div><div class="section-body ${todayCollapsed.overdue ? 'collapsed' : ''}">`;
                 overdue.forEach(t => { const days = getOverdueDays(t); html += taskRowHTML(t, days === 1 ? '逾期 1 天' : `逾期 ${days} 天`, true); });
@@ -2174,6 +2029,13 @@
             const container = document.getElementById('view-overview');
             const activeProjects = db.projects.filter(p => p.status !== '已归档');
             const archivedProjects = db.projects.filter(p => p.status === '已归档');
+            const allProjects = [...activeProjects, ...archivedProjects];
+            const statusOrder = { '进行中': 0, '未开始': 1, '暂存': 2, '已完成': 3, '已归档': 4 };
+            allProjects.sort((a, b) => {
+                const orderA = statusOrder[a.status] !== undefined ? statusOrder[a.status] : 99;
+                const orderB = statusOrder[b.status] !== undefined ? statusOrder[b.status] : 99;
+                return orderA - orderB;
+            });
             const inProg = activeProjects.filter(p => p.status === '进行中' || p.status === '暂存').length;
             const comp = activeProjects.filter(p => p.status === '已完成').length;
             
@@ -2208,7 +2070,7 @@
                 return p.id === activeFilter;
             };
             
-            [...activeProjects, ...archivedProjects].forEach(p => {
+            allProjects.forEach(p => {
                 if (!filterProject(p)) return;
                 
                 const pTasks = db.tasks.filter(t => t.projectId === p.id && filterTask(t));
@@ -2359,12 +2221,6 @@
             const projCompleted = db.projects.filter(p => { const pt = db.tasks.filter(t => t.projectId === p.id); return pt.length > 0 && pt.every(t => t.done); }).length;
             const streak = calculateStreak();
             document.getElementById('ach-completed').textContent = completedCount; document.getElementById('ach-high-done').textContent = highDone; document.getElementById('ach-proj-done').textContent = projCompleted; document.getElementById('ach-streak').textContent = streak;
-            
-            const wordTotal = db.wordCheckins ? db.wordCheckins.length : 0;
-            const wordStreak = calculateWordStreak();
-            document.getElementById('ach-word-total').textContent = wordTotal;
-            document.getElementById('ach-word-streak').textContent = wordStreak;
-            
             const allAchievements = [...db.achievements, ...db.customAchievements];
             allAchievements.forEach(a => { if (a.condition === 'finish1') a.unlocked = completedCount >= 1; if (a.condition === 'finish10') a.unlocked = completedCount >= 10; if (a.condition === 'finish50') a.unlocked = completedCount >= 50; if (a.condition === 'high5') a.unlocked = highDone >= 5; if (a.condition === 'read3') a.unlocked = allDone.filter(t => getProjectName(t.projectId) === '阅读计划').length >= 3; if (a.condition === 'projDone') a.unlocked = projCompleted >= 1; if (a.condition === 'rustHalf') a.unlocked = allDone.filter(t => getProjectName(t.projectId) === '学习 Rust').length >= 3; if (a.condition === 'fit3') a.unlocked = allDone.filter(t => getProjectName(t.projectId) === '健身记录').length >= 3; if (a.condition === 'overdueFix') a.unlocked = db.completedOverdueTasks.length >= 3; });
             const unlockedCount = allAchievements.filter(a => a.unlocked).length, totalAch = allAchievements.length, pct = totalAch > 0 ? Math.round((unlockedCount / totalAch) * 100) : 0;
@@ -2441,7 +2297,7 @@
             const first = new Date(cY, cM, 1).getDay(), days = new Date(cY, cM + 1, 0).getDate();
             const prevD = new Date(cY, cM, 0).getDate(), pm = cM === 0 ? 11 : cM - 1, py = cM === 0 ? cY - 1 : cY;
             const nm = cM === 11 ? 0 : cM + 1, ny = cM === 11 ? cY + 1 : cY;
-            function mkDay(num, mo, yr, other) { const el = document.createElement('div'); el.className = 'cday' + (other ? ' other' : ''); const key = ck(yr, mo, num); if (yr === today.getFullYear() && mo === today.getMonth() && num === today.getDate()) el.classList.add('today'); const tasks = db.calTasks[key] || []; if (tasks.length) el.classList.add('has-tasks'); const isCheckedIn = db.wordCheckins && db.wordCheckins.includes(key); if (isCheckedIn) el.classList.add('has-checkin'); const ne = document.createElement('div'); ne.className = 'cnum'; ne.textContent = num; el.appendChild(ne); if (isCheckedIn) { const cb = document.createElement('div'); cb.className = 'ccheckin'; cb.textContent = '✓'; el.appendChild(cb); } if (tasks.length) { const dd = document.createElement('div'); dd.className = 'cdots'; const uc = { 'high': 'var(--red)', 'mid': 'var(--amber)', 'low': 'var(--green)' }; tasks.slice(0, 4).forEach(t => { const d = document.createElement('div'); d.className = 'cdot'; d.style.background = uc[t.urgency] || 'var(--gray)'; dd.appendChild(d); }); el.appendChild(dd); } el.dataset.calKey = key; el.dataset.calNum = num; el.dataset.calMo = mo; el.dataset.calYr = yr; return el; }
+            function mkDay(num, mo, yr, other) { const el = document.createElement('div'); el.className = 'cday' + (other ? ' other' : ''); const key = ck(yr, mo, num); if (yr === today.getFullYear() && mo === today.getMonth() && num === today.getDate()) el.classList.add('today'); const tasks = db.calTasks[key] || []; if (tasks.length) el.classList.add('has-tasks'); const ne = document.createElement('div'); ne.className = 'cnum'; ne.textContent = num; el.appendChild(ne); if (tasks.length) { const dd = document.createElement('div'); dd.className = 'cdots'; const uc = { 'high': 'var(--red)', 'mid': 'var(--amber)', 'low': 'var(--green)' }; tasks.slice(0, 4).forEach(t => { const d = document.createElement('div'); d.className = 'cdot'; d.style.background = uc[t.urgency] || 'var(--gray)'; dd.appendChild(d); }); el.appendChild(dd); } el.dataset.calKey = key; el.dataset.calNum = num; el.dataset.calMo = mo; el.dataset.calYr = yr; return el; }
             for (let i = first - 1; i >= 0; i--) g.appendChild(mkDay(prevD - i, pm, py, true));
             for (let d = 1; d <= days; d++) g.appendChild(mkDay(d, cM, cY, false));
             const rem = (7 - (first + days) % 7) % 7; for (let n = 1; n <= rem; n++) g.appendChild(mkDay(n, nm, ny, true));
