@@ -1916,6 +1916,36 @@
         function loadDB() { try { const raw = localStorage.getItem(DB_KEY); if (raw) { const saved = JSON.parse(raw); db.projects = saved.projects || db.projects; db.tasks = saved.tasks || db.tasks; db.notes = saved.notes || db.notes; db.achievements = saved.achievements || db.achievements; db.customAchievements = saved.customAchievements || []; db.completedOverdueTasks = saved.completedOverdueTasks || []; db.calTasks = saved.calTasks || {}; } } catch(e) { console.warn(e); } }
         function saveDB() { try { localStorage.setItem(DB_KEY, JSON.stringify({ projects: db.projects, tasks: db.tasks, notes: db.notes, calTasks: db.calTasks, achievements: db.achievements, customAchievements: db.customAchievements, completedOverdueTasks: db.completedOverdueTasks })); } catch(e) {} }
         loadDB();
+        
+        function resetDailyHabits() {
+            const todayKey = today.toISOString().split('T')[0];
+            const lastReset = localStorage.getItem('dailyHabitsLastReset');
+            
+            if (lastReset !== todayKey) {
+                db.tasks.forEach(t => {
+                    if (t.daily && t.done) {
+                        t.done = false;
+                        t.completedAt = null;
+                    }
+                });
+                localStorage.setItem('dailyHabitsLastReset', todayKey);
+                saveDB();
+            }
+        }
+        
+        function checkAndResetDailyHabits() {
+            const currentToday = new Date();
+            currentToday.setHours(0, 0, 0, 0);
+            
+            if (currentToday > today) {
+                today = currentToday;
+                resetDailyHabits();
+                refreshAll();
+            }
+        }
+        
+        resetDailyHabits();
+        setInterval(checkAndResetDailyHabits, 60000);
 
         function genId() { return 'id_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7); }
         function getProject(id) { return db.projects.find(p => p.id === id); }
