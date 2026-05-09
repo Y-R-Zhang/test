@@ -1917,8 +1917,20 @@
         function saveDB() { try { localStorage.setItem(DB_KEY, JSON.stringify({ projects: db.projects, tasks: db.tasks, notes: db.notes, calTasks: db.calTasks, achievements: db.achievements, customAchievements: db.customAchievements, completedOverdueTasks: db.completedOverdueTasks })); } catch(e) {} }
         loadDB();
         
+        const oldResetKey = localStorage.getItem('dailyHabitsLastReset');
+        if (oldResetKey && oldResetKey.includes('T')) {
+            localStorage.removeItem('dailyHabitsLastReset');
+        }
+        
+        function getLocalDateKey(date) {
+            const y = date.getFullYear();
+            const m = String(date.getMonth() + 1).padStart(2, '0');
+            const d = String(date.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+        
         function resetDailyHabits() {
-            const todayKey = today.toISOString().split('T')[0];
+            const todayKey = getLocalDateKey(today);
             const lastReset = localStorage.getItem('dailyHabitsLastReset');
             
             if (lastReset !== todayKey) {
@@ -1937,7 +1949,10 @@
             const currentToday = new Date();
             currentToday.setHours(0, 0, 0, 0);
             
-            if (currentToday > today) {
+            const currentKey = getLocalDateKey(currentToday);
+            const todayKey = getLocalDateKey(today);
+            
+            if (currentKey !== todayKey) {
                 today = currentToday;
                 resetDailyHabits();
                 refreshAll();
